@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -16,6 +17,10 @@ if (!API_KEY) {
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// API routes
 app.get('/api/currencies', async (req, res) => {
   try {
     const response = await axios.get(`${API_BASE}${API_KEY}/latest/USD`);
@@ -39,6 +44,15 @@ app.get('/api/convert', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Conversion failed' });
   }
+});
+
+// Fallback to serve index.html for any unmatched routes
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
+    if (err) {
+      res.status(500).send('Something went wrong');
+    }
+  });
 });
 
 app.listen(port, () => {
