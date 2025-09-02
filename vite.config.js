@@ -7,6 +7,7 @@ const __dirname = dirname(__filename);
 
 export default defineConfig({
   root: resolve(__dirname, 'src'),
+  base: '/',
   server: {
     port: 4200,
   },

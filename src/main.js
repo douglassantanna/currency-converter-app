@@ -6,6 +6,41 @@ const toCurrencySelect = document.getElementById('toCurrency');
 const resultDiv = document.getElementById('result');
 const resultText = resultDiv.querySelector('p');
 const errorDiv = document.getElementById('error');
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+
+function setIcon(isDark) {
+  themeIcon.innerHTML = isDark
+    ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+         d="M21.752 15.002A9.72 9.72 0 0 1 12 21.75c-5.385 
+            0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 
+            9.753 0 0 0 3 12c0 5.385 4.365 9.75 
+            9.75 9.75s9.75-4.365 9.75-9.75c0-.837-.104-1.653-.298-2.435"></path>`
+    : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+         d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 
+            6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 
+            0l-.707.707M6.343 17.657l-.707.707M16 
+            12a4 4 0 11-8 0 4 4 0 018 0z"></path>`;
+}
+
+function toggleTheme() {
+  const isDark = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  setIcon(isDark);
+}
+
+// Load saved theme or system preference
+const savedTheme =
+  localStorage.getItem('theme') ||
+  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+const isDark = savedTheme === 'dark';
+document.documentElement.classList.toggle('dark', isDark);
+setIcon(isDark);
+
+if (themeToggle && themeIcon) {
+  themeToggle.addEventListener('click', toggleTheme);
+}
 
 // Fetch and populate currencies
 async function loadCurrencies() {
