@@ -6,7 +6,8 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 8080;
 
-const API_KEY = process.env.EXCHANGE_API_KEY;
+const API_KEY =
+  process.env.APPSETTING_EXCHANGE_API_KEY || process.env.EXCHANGE_API_KEY;
 const API_BASE = "https://v6.exchangerate-api.com/v6/";
 
 if (!API_KEY) {
