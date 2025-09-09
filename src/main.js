@@ -1,13 +1,13 @@
-const apiUrl = 'http://localhost:3000/api';
+const apiUrl = "/api";
 
-const amountInput = document.getElementById('amount');
-const fromCurrencySelect = document.getElementById('fromCurrency');
-const toCurrencySelect = document.getElementById('toCurrency');
-const resultDiv = document.getElementById('result');
-const resultText = resultDiv.querySelector('p');
-const errorDiv = document.getElementById('error');
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
+const amountInput = document.getElementById("amount");
+const fromCurrencySelect = document.getElementById("fromCurrency");
+const toCurrencySelect = document.getElementById("toCurrency");
+const resultDiv = document.getElementById("result");
+const resultText = resultDiv.querySelector("p");
+const errorDiv = document.getElementById("error");
+const themeToggle = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
 
 function setIcon(isDark) {
   themeIcon.innerHTML = isDark
@@ -24,37 +24,43 @@ function setIcon(isDark) {
 }
 
 function toggleTheme() {
-  const isDark = document.documentElement.classList.toggle('dark');
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  const isDark = document.documentElement.classList.toggle("dark");
+  localStorage.setItem("theme", isDark ? "dark" : "light");
   setIcon(isDark);
 }
 
 // Load saved theme or system preference
 const savedTheme =
-  localStorage.getItem('theme') ||
-  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  localStorage.getItem("theme") ||
+  (window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light");
 
-const isDark = savedTheme === 'dark';
-document.documentElement.classList.toggle('dark', isDark);
+const isDark = savedTheme === "dark";
+document.documentElement.classList.toggle("dark", isDark);
 setIcon(isDark);
 
 if (themeToggle && themeIcon) {
-  themeToggle.addEventListener('click', toggleTheme);
+  themeToggle.addEventListener("click", toggleTheme);
 }
 
 // Fetch and populate currencies
 async function loadCurrencies() {
   try {
     const response = await fetch(`${apiUrl}/currencies`);
-    if (!response.ok) throw new Error('Failed to fetch currencies');
+    if (!response.ok) throw new Error("Failed to fetch currencies");
     const currencies = await response.json();
-    fromCurrencySelect.innerHTML = currencies.map(c => `<option value="${c}">${c}</option>`).join('');
-    toCurrencySelect.innerHTML = currencies.map(c => `<option value="${c}">${c}</option>`).join('');
-    fromCurrencySelect.value = 'USD';
-    toCurrencySelect.value = 'EUR';
+    fromCurrencySelect.innerHTML = currencies
+      .map((c) => `<option value="${c}">${c}</option>`)
+      .join("");
+    toCurrencySelect.innerHTML = currencies
+      .map((c) => `<option value="${c}">${c}</option>`)
+      .join("");
+    fromCurrencySelect.value = "USD";
+    toCurrencySelect.value = "EUR";
     convert();
   } catch (err) {
-    showError('Failed to load currencies');
+    showError("Failed to load currencies");
   }
 }
 
@@ -65,33 +71,37 @@ async function convert() {
   const to = toCurrencySelect.value;
 
   if (!amount || amount <= 0) {
-    showError('Please enter a positive amount');
+    showError("Please enter a positive amount");
     return;
   }
 
   try {
-    const response = await fetch(`${apiUrl}/convert?from=${from}&to=${to}&amount=${amount}`);
-    if (!response.ok) throw new Error('Conversion failed');
+    const response = await fetch(
+      `${apiUrl}/convert?from=${from}&to=${to}&amount=${amount}`
+    );
+    if (!response.ok) throw new Error("Conversion failed");
     const data = await response.json();
-    resultText.textContent = `${amount} ${from} = ${data.result.toFixed(2)} ${to}`;
-    resultDiv.classList.remove('hidden');
-    errorDiv.classList.add('hidden');
+    resultText.textContent = `${amount} ${from} = ${data.result.toFixed(
+      2
+    )} ${to}`;
+    resultDiv.classList.remove("hidden");
+    errorDiv.classList.add("hidden");
   } catch (err) {
-    showError('Conversion failed. Please try again.');
+    showError("Conversion failed. Please try again.");
   }
 }
 
 // Show error message
 function showError(message) {
   errorDiv.textContent = message;
-  errorDiv.classList.remove('hidden');
-  resultDiv.classList.add('hidden');
+  errorDiv.classList.remove("hidden");
+  resultDiv.classList.add("hidden");
 }
 
 // Event listeners
-amountInput.addEventListener('input', convert);
-fromCurrencySelect.addEventListener('change', convert);
-toCurrencySelect.addEventListener('change', convert);
+amountInput.addEventListener("input", convert);
+fromCurrencySelect.addEventListener("change", convert);
+toCurrencySelect.addEventListener("change", convert);
 
 // Initialize
 loadCurrencies();
