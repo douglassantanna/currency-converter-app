@@ -47,4 +47,4 @@ jobs:
           app-name: 'currency-app-linux'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_LINUX_APP }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CURRENCY_APP_LINUX }}
