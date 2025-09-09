@@ -1,63 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Currency Converter</title>
   <link rel="stylesheet" href="/styles.css">
   <script>
-  if (
-    localStorage.getItem('theme') === 'dark' ||
-    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)
-  ) {
-    document.documentElement.classList.add('dark');
-  }
-</script>
+    if (
+      localStorage.getItem('theme') === 'dark' ||
+      (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
 
 </head>
-<body class="min-h-screen bg-gradient-to-br from-blue-50 to-teal-50 dark:from-gray-900 dark:to-indigo-900 transition-colors duration-300">
-  <div class="container mx-auto p-6 max-w-lg">
-    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-colors duration-300">
-      <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold text-blue-600 dark:text-cyan-400 text-center">Currency Converter</h1>
-        <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-          <svg id="theme-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+
+<body
+  class="min-h-screen bg-gradient-to-br from-blue-50 to-teal-50 dark:from-gray-900 dark:to-indigo-900 transition-colors duration-300">
+  <div class="container mx-auto px-4 py-6 max-w-md sm:max-w-lg lg:max-w-2xl">
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 transition-colors duration-300">
+      <div class="flex justify-between items-center mb-4 sm:mb-6">
+        <h1 class="text-xl sm:text-2xl font-bold text-blue-600 dark:text-cyan-400 text-center flex-1">Currency Converter
+        </h1>
+        <button id="theme-toggle"
+          class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition ml-2">
+          <svg id="theme-icon" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+            </path>
           </svg>
         </button>
       </div>
-      <div class="grid grid-cols-1 gap-6">
+      <div class="space-y-4 sm:space-y-6">
         <div>
           <label for="amount" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Amount</label>
-          <input
-            type="number"
-            id="amount"
-            value="1"
+          <input type="number" id="amount" value="1"
             class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md p-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 dark:focus:ring-cyan-500 focus:border-transparent transition"
-            placeholder="Enter amount"
-          />
+            placeholder="Enter amount" inputmode="numeric" min="0" step="0.01" />
         </div>
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label for="fromCurrency" class="block text-sm font-medium text-gray-700 dark:text-gray-300">From</label>
-            <select id="fromCurrency" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md p-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 dark:focus:ring-cyan-500 focus:border-transparent transition">
+            <select id="fromCurrency"
+              class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md p-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 dark:focus:ring-cyan-500 focus:border-transparent transition">
               <option value="USD">USD</option>
             </select>
           </div>
           <div>
             <label for="toCurrency" class="block text-sm font-medium text-gray-700 dark:text-gray-300">To</label>
-            <select id="toCurrency" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md p-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 dark:focus:ring-cyan-500 focus:border-transparent transition">
+            <select id="toCurrency"
+              class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md p-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 dark:focus:ring-cyan-500 focus:border-transparent transition">
               <option value="EUR">EUR</option>
             </select>
           </div>
         </div>
         <div id="result" class="mt-4 text-center hidden">
-          <p class="text-lg font-semibold text-blue-600 dark:text-cyan-400"></p>
+          <p
+            class="text-lg font-semibold text-blue-600 dark:text-cyan-400 bg-blue-50 dark:bg-cyan-900/20 rounded-lg p-3">
+          </p>
         </div>
-        <div id="error" class="mt-4 text-red-500 dark:text-red-400 text-center hidden"></div>
+        <div id="error"
+          class="mt-4 text-red-500 dark:text-red-400 text-center hidden bg-red-50 dark:bg-red-900/20 rounded-lg p-3">
+        </div>
       </div>
     </div>
   </div>
   <script type="module" src="/main.js"></script>
 </body>
+
 </html>
