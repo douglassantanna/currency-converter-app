@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "vite",
+    "start": "node backend/server.js",
     "build": "vite build",
     "preview": "vite preview",
     "postbuild": "rm -rf backend/public/* && cp -r dist/* backend/public/"
