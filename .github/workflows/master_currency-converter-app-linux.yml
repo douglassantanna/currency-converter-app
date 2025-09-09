@@ -1,4 +1,4 @@
-name: Build and deploy to Azure Web App
+name: Build and deploy to Linux
 
 on:
   workflow_dispatch:
