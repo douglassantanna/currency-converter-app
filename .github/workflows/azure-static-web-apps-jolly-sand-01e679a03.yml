@@ -25,7 +25,7 @@ jobs:
       - run: |
           cd frontend
           npm install
-          npm run build --mode production
+          npm run build -- --mode production
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
