@@ -1,6 +1,7 @@
 {
   "name": "currency-converter-frontend",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "start": "vite",
     "build": "vite build",
