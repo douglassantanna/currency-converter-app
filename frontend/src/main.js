@@ -1,4 +1,4 @@
-const apiUrl = "/api";
+const apiUrl = import.meta.env.VITE_API_URL || 'https://backend-linux-fmhqavhvc7gzb2fz.northeurope-01.azurewebsites.net/api';
 
 const amountInput = document.getElementById("amount");
 const fromCurrencySelect = document.getElementById("fromCurrency");

@@ -14,7 +14,7 @@ if (!API_KEY) {
 }
 
 app.use(cors({
-  origin: 'https://conv.sanfi.xyz'
+  origin: 'https://jolly-sand-01e679a03.2.azurestaticapps.net/'
 }));
 app.use(express.json());
 
