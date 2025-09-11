@@ -3,12 +3,11 @@ name: Build and Deploy Backend Linux
 on:
   push:
     branches:
-      - feature/separate-frontend-backend
+      - feat/separate-backend-frontend
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - feature/separate-frontend-backend
-  workflow_dispatch:
+      - feat/separate-backend-frontend
 
 jobs:
   build:
