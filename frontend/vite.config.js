@@ -23,6 +23,6 @@ export default defineConfig({
     emptyOutDir: true,
   },
   define: {
-    'import.meta.env.VITE_API_URL': JSON.stringify(env.VITE_API_URL || 'http://localhost:3000/api'),
+    'import.meta.env.VITE_API_URL': JSON.stringify(process.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? 'https://backend-linux-fmhqavhvc7gzb2fz.northeurope-01.azurewebsites.net/api' : 'http://localhost:3000/api')),
   },
 });

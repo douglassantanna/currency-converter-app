@@ -1,5 +1,9 @@
-const apiUrl = import.meta.env.VITE_API_URL || 'https://backend-linux-fmhqavhvc7gzb2fz.northeurope-01.azurewebsites.net/api';
-
+let apiUrl;
+if (import.meta.env.MODE === 'production') {
+  apiUrl = import.meta.env.VITE_API_URL || 'https://backend-linux-fmhqavhvc7gzb2fz.northeurope-01.azurewebsites.net/api';
+} else {
+  apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+}
 const amountInput = document.getElementById("amount");
 const fromCurrencySelect = document.getElementById("fromCurrency");
 const toCurrencySelect = document.getElementById("toCurrency");
